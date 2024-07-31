@@ -1,6 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
-import { Providers } from '@/components/providers/Providers';
+import React from "react";
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
@@ -11,19 +11,22 @@ export const metadata = {
   description: "The fastest way to build apps with Next.js and Supabase",
 };
 
-export default function RootLayout({
+
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground">
-      <Providers attribute="class" defaultTheme="light">
-        <div className="relative flex h-screen flex-col">
-          <main className="container flex-1 py-5">{children}</main>
-        </div>
-      </Providers>
+          <div className="relative flex h-screen flex-col">
+            <div className="flex flex-1">
+              <main className="container flex justify-center flex-1 py-5">{children}</main>
+            </div>
+          </div>
       </body>
     </html>
   );

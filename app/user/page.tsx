@@ -28,12 +28,12 @@ import {
   Select,
   SelectItem
 } from "@nextui-org/react";
-import { PlusIcon } from "./PlusIcon";
-import { VerticalDotsIcon } from "./VerticalDotsIcon";
-import { SearchIcon } from "./SearchIcon";
-import { ChevronDownIcon } from "./ChevronDownIcon";
+import { PlusIcon } from "../../components/icons/PlusIcon";
+import { VerticalDotsIcon } from "../../components/icons/VerticalDotsIcon";
+import { SearchIcon } from "../../components/icons/SearchIcon";
+import { ChevronDownIcon } from "../../components/icons/ChevronDownIcon";
 import { columns, statusOptions } from "./data";
-import { capitalize } from "./utils";
+import { capitalize } from "../../utils/supabase/capitalize";
 
 type UserType = {
   id: string;
@@ -150,8 +150,8 @@ export default function Page() {
 
   const sortedItems = useMemo(() => {
     return [...items].sort((a, b) => {
-      const first = a[sortDescriptor.column];
-      const second = b[sortDescriptor.column];
+      const first = a[sortDescriptor.column as keyof UserType] ?? ''; // Add nullish coalescing operator
+      const second = b[sortDescriptor.column as keyof UserType] ?? ''; 
       const cmp = first < second ? -1 : first > second ? 1 : 0;
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
     });
@@ -189,7 +189,7 @@ export default function Page() {
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly size="sm" variant="light">
-                  <VerticalDotsIcon className="text-default-300" />
+                  <VerticalDotsIcon />
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
@@ -204,18 +204,6 @@ export default function Page() {
         return cellValue as string;
     }
   }, []);
-
-  const onNextPage = useCallback(() => {
-    if (page < pages) {
-      setPage(page + 1);
-    }
-  }, [page, pages]);
-
-  const onPreviousPage = useCallback(() => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  }, [page]);
 
   const onRowsPerPageChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
     setRowsPerPage(Number(e.target.value));
@@ -265,7 +253,7 @@ export default function Page() {
                 onSelectionChange={(keys: SharedSelection) => setStatusFilter(keys as string)}
               >
                 {statusOptions.map((status) => (
-                  <DropdownItem key={status.key}>{status.name}</DropdownItem>
+                  <DropdownItem key={status.uid}>{status.name}</DropdownItem>
                 ))}
               </DropdownMenu>
             </Dropdown>
@@ -315,11 +303,11 @@ export default function Page() {
               (column) => {
                 if (sortDescriptor.column === column.column) {
                   setSortDescriptor({
-                    column: column.column || "",
+                    column: column.column?.toString() || "", // Convert column.column to string
                     direction: sortDescriptor.direction === "ascending" ? "descending" : "ascending",
                   });
                 } else {
-                  setSortDescriptor({ column: column.column || "", direction: "ascending" });
+                  setSortDescriptor({ column: column.column?.toString() || "", direction: "ascending" }); // Convert column.column to string
                 }
               }
             }
@@ -335,7 +323,7 @@ export default function Page() {
               {(user) => (
                 <TableRow key={user.id}>
                   {(columnKey) => (
-                    <TableCell>{renderCell(user, columnKey)}</TableCell>
+                    <TableCell>{renderCell(user, columnKey.toString())}</TableCell>
                   )}
                 </TableRow>
               )}
@@ -381,16 +369,6 @@ export default function Page() {
                       </SelectItem>
                     ))}
                   </Select>
-                  <select
-                    className="rounded-lg p-2"
-                    onChange={(e) => setNewUser({ ...newUser, status: e.target.value })}
-                  >
-                    {statusOptions.map((status) => (
-                      <option key={status.key} value={status.key}>
-                        {status.name}
-                      </option>
-                    ))}
-                  </select>
                 </div>
               </ModalBody>
               <ModalFooter>
