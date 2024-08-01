@@ -14,6 +14,7 @@ import { NavLink } from '@/components/ui/link/NavLink';
 import { ThemeSwitch } from '@/components/ui/ThemeSwitch';
 import { siteConfig } from '@/config/site';
 import { AuthButton } from '@/features/auth/components/AuthButton';
+import { Avatar } from '@nextui-org/react';
 
 export const Header = () => (
   <NextUINavbar maxWidth="full" position="sticky">
@@ -61,6 +62,15 @@ export const Header = () => (
           </NavbarMenuItem>
         ))}
         <div className="flex-1" />
+        <Avatar
+            isBordered
+            as="button"
+            className="mx-5 transition-transform"
+            color="secondary"
+            name="Jason Hughes"
+            size="sm"
+            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+          />
         <NavbarItem className="text-xl">
           <AuthButton />
         </NavbarItem>

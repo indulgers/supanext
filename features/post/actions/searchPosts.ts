@@ -23,7 +23,6 @@ export const searchPosts = baseProcedure.input(PostSearchSchema).handler(async (
       `,
     { count: 'exact' },
   );
-
   if (title) {
     query = query.ilike('title', `%${title}%`);
   }

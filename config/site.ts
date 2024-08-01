@@ -20,6 +20,14 @@ export const siteConfig = {
       label: 'Blog',
       href: '/blog',
     },
+    {
+      label: 'Users',
+      href: '/user',
+    },
+    {
+      label: 'Dashboard',
+      href: '/dashboard',
+    }
   ],
   navMenuItems: [
     {

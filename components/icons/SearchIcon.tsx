@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 export const SearchIcon = (props: React.JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>) => (
   <svg
     aria-hidden="true"
@@ -17,12 +17,6 @@ export const SearchIcon = (props: React.JSX.IntrinsicAttributes & React.SVGProps
       strokeLinejoin="round"
       strokeWidth="2"
     />
-    <path
-      d="M22 22L20 20"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-    />
+    <path d="M22 22L20 20" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
   </svg>
 );

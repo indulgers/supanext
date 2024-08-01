@@ -9,7 +9,6 @@ import { authedProcedure } from '@/lib/zsa/authedProcedure';
  */
 export const searchNotes = authedProcedure.handler(async ({ ctx }) => {
   const res = await ctx.supabase.from('notes').select().order('id', { ascending: false });
-
   if (res.error) {
     throw res.error.message;
   }
