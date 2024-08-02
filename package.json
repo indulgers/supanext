@@ -1,7 +1,4 @@
 {
-  "name": "next-supabase",
-  "description": "Next.js Blog with Supabase",
-  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "next dev",

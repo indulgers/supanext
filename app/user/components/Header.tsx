@@ -12,7 +12,6 @@ export default async function Index() {
     // Feel free to remove it once you have Supabase connected.
     try {
       createClient();
-
       return true;
     } catch (e) {
       return false;
@@ -20,7 +19,6 @@ export default async function Index() {
   };
 
   const isSupabaseConnected = canInitSupabaseClient();
-
   return (
     <Navbar isBordered>
       <NavbarContent justify="start">
