@@ -87,7 +87,6 @@ export default function Page() {
 
   async function fetchUsers() {
     const { data, error } = await supabase.from('users').select();
-
     if (error) {
       console.error(error);
     } else {
@@ -113,7 +112,6 @@ export default function Page() {
 
   async function deleteUser(id: string) {
     const { error } = await supabase.from('users').delete().match({ id });
-
     if (error) {
       console.error(error);
     } else {
@@ -123,7 +121,6 @@ export default function Page() {
 
   async function updateUser(id: string, updatedUser: Partial<UserType>) {
     const { data, error } = await supabase.from('users').update(updatedUser).match({ id });
-
     if (error) {
       console.error(error);
     } else {
@@ -133,7 +130,6 @@ export default function Page() {
 
   const headerColumns = useMemo(() => {
     if (visibleColumns.size === columns.length) return columns;
-
     return columns.filter((column) => visibleColumns.has(column.uid));
   }, [visibleColumns]);
 
@@ -155,7 +151,6 @@ export default function Page() {
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
-
     return filteredItems.slice(start, end);
   }, [page, filteredItems, rowsPerPage]);
 
