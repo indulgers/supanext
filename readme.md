@@ -1,136 +1,97 @@
-# Next.js, NextUI with Supabase
+<<<<<<< HEAD
+<a href="https://demo-nextjs-with-supabase.vercel.app/">
+  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
+  <h1 align="center">Next.js and Supabase Starter Kit</h1>
+</a>
 
-## Technologies Used
+<p align="center">
+ The fastest way to build apps with Next.js and Supabase
+</p>
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
-- [Supabase](https://supabase.com/docs/reference/javascript)
-- [MDXEditor](https://mdxeditor.dev/)
-- [ZOD](https://zod.dev/)
+<p align="center">
+  <a href="#features"><strong>Features</strong></a> ·
+  <a href="#demo"><strong>Demo</strong></a> ·
+  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
+  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
+  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
+  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
+</p>
+<br/>
 
-### Install dependencies
+## Features
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `bun`:
+- Works across the entire [Next.js](https://nextjs.org) stack
+  - App Router
+  - Pages Router
+  - Middleware
+  - Client
+  - Server
+  - It just works!
+- supabase-ssr. A package to configure Supabase Auth to use cookies
+- Styling with [Tailwind CSS](https://tailwindcss.com)
+- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
+  - Environment variables automatically assigned to Vercel project
 
-```bash
-bun install # or bun i
-```
+## Demo
 
-### Run the development server
+You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
 
-```bash
-bun dev
-```
+## Deploy to Vercel
 
-## Next app router
+Vercel deployment will guide you through creating a Supabase account and project.
 
-### /(private)/\*
+After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
 
-> Use this route group as a way to group routes
-> that are only accessible to authenticated users.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This%20starter%20configures%20Supabase%20Auth%20to%20use%20cookies%2C%20making%20the%20user's%20session%20available%20throughout%20the%20entire%20Next.js%20app%20-%20Client%20Components%2C%20Server%20Components%2C%20Route%20Handlers%2C%20Server%20Actions%20and%20Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6)
 
-- /blog
-  - /create
-  - /edit/[id]
-- /notes
+The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
 
-### /api routes
+If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
 
-- `[GET]` `/api/auth/callback` – callback route for the OAuth providers;
-- `[GET]` `/api/auth/confirm` – confirm the email OTP and redirect the user to the next page;
-- `[DELETE]` `/api/posts` – delete a blog post by id;
-- `[DELETE]` `/api/notes` – delete a note by id;
-- `[POST]` `/upload` – upload an image to the supabase storage;
+## Clone and run locally
 
-### Blog
+1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
 
-- /blog/[slug] – view a blog post by slug;
-- /blog – view all blog posts;
+2. Create a Next.js app using the Supabase Starter template npx command
 
-## Project Structure
+   ```bash
+   npx create-next-app -e with-supabase
+   ```
 
-```
-.
-├── app (API routes, pages and layouts)
-├── components (components grouped by purpose: form, ui, etc.)
-├── config (configuration files, constants etc.)
-├── hooks (custom react hooks)
-├── lib (utility functions: next, api, supabase, zod, etc.)
-├── public (public assets)
-├── server (server-side logic: actions, services, etc.)
-├── styles (global styles, tailwind config)
-├── types (typescript types grouped by entity or purpose)
-└── validators (entity validators using zod)
+3. Use `cd` to change into the app's directory
 
-```
+   ```bash
+   cd name-of-new-app
+   ```
 
-## Server-Side Interaction Approaches
+4. Rename `.env.local.example` to `.env.local` and update the following:
 
-In the application, interaction with the server-side can be managed through two primary methods: server-actions and browser requests to API
-endpoints. Each method leverages the `entityService` as an entry point, ensuring consistency in how data is managed and operations are
-performed.
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
+   ```
 
-#### 1. Using Server-Actions (e.g. `server/actions/post.ts`)
+   Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
 
-Server-actions are methods defined on the server that directly handle the lifecycle of requests—from parsing data to calling service methods
-and formatting responses. This approach is considered the default and recommended for its ability to tightly integrate with server logic and
-services.
+5. You can now run the Next.js local development server:
 
-**Example Usage:**
+   ```bash
+   npm run dev
+   ```
 
-```tsx
-import { postCreate, postUpdate } from '@/server/actions/post';
+   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
 
-const DummyExample = () => {
-  const [response, formAction] = useFormState(action, { statusText: '', status: 0, data: null });
-  return (
-    <Form action={formAction}>
-      <Submit />
-    </Form>
-  );
-};
-```
+> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
 
-#### Advantages:
+## Feedback and issues
 
-- Direct access to server resources and services.
-- Efficient handling of data validation and transformation.
-- Consolidated error handling and response formatting.
+Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
 
-#### 2. Using Browser Requests to API Endpoints (e.g. `app/api/posts/route.ts`)
+## More Supabase examples
 
-Browser requests are a simpler and more straightforward method where the frontend sends HTTP requests directly to defined API endpoints.
-These endpoints parse the requests, perform operations via the entity services, and send back the responses.
-
-**Example Usage:**
-
-```tsx
-import { useApi } from '@/hooks/useApi';
-
-export const DeletePostButton = ({ id }: TPostId) => {
-  const [deletePost, pending] = useApi<TPostId>('delete', 'posts');
-  return (
-    <Button isLoading={pending} onClick={() => deletePost({ id })}>
-      <Trash />
-    </Button>
-  );
-};
-```
-
-#### Features:
-
-- Less code, ideal for simple CRUD operations.
-- Supports all HTTP methods.
-- Manages request states using React's useTransition for smooth user experiences.
-- Automatically refreshes components or pages upon request completion.
-
-#### Summary
-
-Both methods, server-actions and browser requests, are effective for interacting with the server-side but cater to different needs and
-complexities in application architecture. Server-actions offer more robust handling at the cost of tighter coupling, while browser requests
-provide flexibility and simplicity, ideal for scenarios where rapid development and deployment are prioritized.
+- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
+- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
+- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+=======
+# dokichat-cms
+>>>>>>> ca1c86c032f17aad47db66b8a2d99bd153eb37a2
