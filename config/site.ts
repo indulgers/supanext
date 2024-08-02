@@ -36,7 +36,7 @@ export const siteConfig = {
     },
   ],
   links: {
-    github: 'https://github.com/floatrx',
+    github: 'https://github.com/the1-dreamcode/dokichat-cms',
     docs: 'https://nextui.org',
   },
 };
