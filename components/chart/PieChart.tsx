@@ -44,16 +44,16 @@ export const PieChart: React.FC = () => {
 
   const [count, setCount] = useState(0);
 
-  function onChartReady(echarts) {
+  function onChartReady(echarts:echarts.ECharts) {
     console.log('echarts is ready', echarts);
   }
 
-  function onChartClick(param, echarts) {
+  function onChartClick(param:any, echarts:echarts.ECharts) {
     console.log(param, echarts);
     setCount(count + 1);
   };
 
-  function onChartLegendselectchanged(param, echarts) {
+  function onChartLegendselectchanged(param:any, echarts:echarts.ECharts) {
     console.log(param, echarts);
   };
 

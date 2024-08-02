@@ -1333,9 +1333,8 @@ export const Dot: RC<IProps> = () => {
           },
         },
         draggable: true,
-        data: webkitDep.nodes.map(function (node, idx) {
-          node.id = idx;
-          return node;
+        data: webkitDep.nodes.map(function (node, idx: number) {
+          return { ...node, id: idx };
         }),
         categories: webkitDep.categories,
         force: {

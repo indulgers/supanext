@@ -136,7 +136,7 @@ export const DynamicChart: FC<IProps> = () => {
   const [option, setOption] = useState(DEFAULT_OPTION);
 
   function fetchNewData() {
-    const axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+    const axisData: string = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
     const newOption = cloneDeep(option); // immutable
     newOption.title.text = 'Hello Echarts-for-react.' + new Date().getSeconds();
     const data0 = newOption.series[0].data;
@@ -147,9 +147,9 @@ export const DynamicChart: FC<IProps> = () => {
     data1.push(Number((Math.random() * 10 + 5).toFixed(1)));
 
     newOption.xAxis[0].data.shift();
-    newOption.xAxis[0].data.push(axisData);
+    newOption.xAxis[0].data.push(axisData as never);
     newOption.xAxis[1].data.shift();
-    newOption.xAxis[1].data.push(count++);
+    newOption.xAxis[1].data.push(count++ as never);
 
     setOption(newOption);
   }
