@@ -25,7 +25,7 @@ const baseOAuthProcedure = ({ options, ...credentials }: SignInWithOAuthCredenti
         ...credentials,
         options: {
           ...options,
-          redirectTo: `${baseUrl}/api/auth/callback`,
+          redirectTo: `${location.href}/api/auth/callback`,
         },
       });
 
