@@ -57,7 +57,7 @@ export const useUploadImage = (initialValue?: string | null) => {
       // Set the full supabase storage image URL as the value
       setImgUrl(getImageUrl(result.path));
       toast.success('File uploaded successfully.');
-    } catch (e) {
+    } catch (e: any) {
       toast.error('Error uploading file:', e.message);
     }
   };

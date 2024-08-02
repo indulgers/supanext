@@ -35,12 +35,12 @@ export const AuthLoginForm: RC<IProps> = ({ message }) => {
     startTransition(async () => {
       try {
         const [, err] = (await fn(new FormData(formRef.current!))) ?? []; // next.js redirects from sa -> returns undefined, so we use empty array as fallback
-
+      
         if (err) {
           throw new Error(err.message); // coz: fn is safe async function
         }
         toast.success('Login successful');
-      } catch (e) {
+      } catch (e: any) {
         toast.error(e.message);
       }
     });
