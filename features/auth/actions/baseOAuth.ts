@@ -8,7 +8,7 @@ import { z } from 'zod';
 
 import { baseUrl } from '@/config';
 import { baseProcedure } from '@/lib/zsa/baseProcedure';
-
+import { createClient } from '@/utils/supabase/server';
 /**
  * Base OAuth procedure for Google and GitHub login
  * @param options - OAuth options (scopes etc.)
@@ -21,11 +21,12 @@ const baseOAuthProcedure = ({ options, ...credentials }: SignInWithOAuthCredenti
     .output(z.void())
     .onSuccess(() => revalidatePath('/', 'layout'))
     .handler(async ({ ctx }): Promise<void> => {
+      console.log('credentials)', credentials);
       const { data, error } = await ctx.supabase.auth.signInWithOAuth({
         ...credentials,
         options: {
           ...options,
-          redirectTo: `${location.href}/api/auth/callback`,
+          redirectTo: `http://localhost:3000/api/auth/callback`,
         },
       });
 
@@ -33,7 +34,6 @@ const baseOAuthProcedure = ({ options, ...credentials }: SignInWithOAuthCredenti
       if (error) {
         throw error.message;
       }
-
       // Proceed to the URL provided by the OAuth provider
       redirect(data.url);
     });
@@ -46,7 +46,10 @@ const baseOAuthProcedure = ({ options, ...credentials }: SignInWithOAuthCredenti
 export const googleLogin = baseOAuthProcedure({
   provider: 'google',
   options: {
-    scopes: 'email profile',
+    queryParams: {
+      access_type: "offline",
+      prompt: "consent",
+    },
   },
 });
 
@@ -56,4 +59,7 @@ export const googleLogin = baseOAuthProcedure({
  */
 export const githubLogin = baseOAuthProcedure({
   provider: 'github',
+  options: {
+    scopes: 'user:email',
+  },
 });
