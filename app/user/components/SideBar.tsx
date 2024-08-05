@@ -7,7 +7,7 @@ import { useState } from 'react';
 export default function SidebarMenu() {
   const [isVertical, setIsVertical] = useState(true);
   const pathname = usePathname();
-  const [activeTab, setActiveTab] = useState(pathname.replace('/', ''));
+  const [activeTab, setActiveTab] = useState(pathname?.replace('/', ''));
 
   return (
     <div className="flex flex-col px-4">
