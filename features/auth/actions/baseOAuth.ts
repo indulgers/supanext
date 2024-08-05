@@ -20,13 +20,12 @@ const baseOAuthProcedure = ({ options, ...credentials }: SignInWithOAuthCredenti
     .input(z.any(), { type: 'formData' })
     .output(z.void())
     .onSuccess(() => revalidatePath('/', 'layout'))
-    .handler(async ({ ctx }): Promise<void> => {
-      console.log('credentials)', credentials);
+    .handler(async ({ ctx }:any): Promise<void> => {
       const { data, error } = await ctx.supabase.auth.signInWithOAuth({
         ...credentials,
         options: {
           ...options,
-          redirectTo: `http://localhost:3000/api/auth/callback`,
+          redirectTo: `${baseUrl}/api/auth/callback`,
         },
       });
 
